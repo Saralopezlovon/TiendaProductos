@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate')
+
 const objectSchema = {
     id: {
         type: Number     
@@ -21,6 +23,8 @@ const objectSchema = {
 };
 
 const productsSchema = mongoose.Schema(objectSchema);
+
+productsSchema.plugin(mongoosePaginate);
 
 const Products = mongoose.model('Products', productsSchema);
 
