@@ -2,14 +2,15 @@ const Products = require('../models/products')
 
 const products = {
     
-
     getAllProducts : async (req, res) =>{
     
         try{
-            const { page = 1, perPage = 10 } = req.query;
+            const { page = 1, perPage = 10, sort ={name: 1, price:1}  } = req.query;
             const options ={
                 page: parseInt(page,10),
-                limit: parseInt(perPage,10)
+                limit: parseInt(perPage,10),
+                sort: sort
+
             }
 
             const data = await Products.paginate({}, options)
@@ -20,10 +21,8 @@ const products = {
         }
     },
 
-
     findNameProduct: async (req, res) =>{
-        try{
-    
+        try{    
             let data
 
             function escapeRegex(text) {
@@ -32,10 +31,11 @@ const products = {
 
             if (req.query.nameProduct) {
 
-                const { page = 1, perPage = 10 } = req.query;
+                const { page = 1, perPage = 10, sort ={name: 1, price:1} } = req.query;
                 const options ={
                 page: parseInt(page,10),
-                limit: parseInt(perPage,10)
+                limit: parseInt(perPage,10),
+                sort: sort
                 }
 
                 const regex = new RegExp(escapeRegex(req.query.nameProduct), 'gi');
@@ -45,8 +45,7 @@ const products = {
 
         }catch(err){
             res.status(400).json({"error":err});
-        }
-    
+        }    
     }
 
 }
