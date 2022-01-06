@@ -9,8 +9,8 @@ const products = {
             const options ={
                 page: parseInt(page,10),
                 limit: parseInt(perPage,10),
-                sort: sort
-
+                sort: sort,
+                populate: {path:'id_provider'}
             }
 
             const data = await Products.paginate({}, options)
