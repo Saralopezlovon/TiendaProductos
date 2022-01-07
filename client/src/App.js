@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+//import React, { useState, useEffect } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Footer from './components/Footer/Footer';
+import { BrowserRouter } from 'react-router-dom'; //Para utilizar rutas
+import { productContext } from './context/productContext'; //Para utilizar context en apertura -> value={input} 
+//import axios from 'axios';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter> 
+          <productContext.Provider >    
+            <Header/>
+            <Main/>  
+          </productContext.Provider>            
+      </BrowserRouter>
+
+      <Footer/>
+    
     </div>
   );
 }
