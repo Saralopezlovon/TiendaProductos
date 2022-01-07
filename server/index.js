@@ -2,7 +2,7 @@ const express = require('express')
 const productsRouter= require('./routes/products')
 
 const app = express()
-const port = 3000
+const port = 4000 //3000 para el front y 4000 para el back
 
 app.use(express.json()) // Para habilitar envio de JSON al servidor
 
