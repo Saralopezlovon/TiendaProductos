@@ -6,14 +6,30 @@ import './Header.css';
 
 const Header = () => {
 
-  const {setInfo} = useContext(productContext)
+  const {setInfo, sortName, set_sortName} = useContext(productContext)
 
   const handleSubmit = (event) =>{
     event.preventDefault();
     const productSearched = event.target.elements.productSearched.value 
     setInfo(productSearched)  
-  }
+  };
 
+  // let counterName = 1;
+
+  const submitName = (event) =>{
+
+    event.preventDefault();
+        
+    const counterName = sortName === 1 ? -1 : 1;
+
+    let btnSortName = document.getElementById("btnSortName");  
+    btnSortName.style.color = btnSortName.style.color === "blue" ? "black" : "blue"; 
+
+    set_sortName(counterName) 
+
+  }
+  
+  
   return (
 
   <header> 
@@ -28,9 +44,9 @@ const Header = () => {
     </div>
 
     <div className="sortContainer">
-      <button className="btnSortName" type="submit">Ordenar por nombre</button>
-      <button className="btnSortPrice" type="submit">Ordenar por precio</button>
-      <button className="btnSortRating" type="submit">Ordenar por relevancia</button>
+      <button className="btnSortName" onClick={submitName} id="btnSortName">Ordenar por nombre</button>
+      <button className="btnSortPrice">Ordenar por precio</button>
+      <button className="btnSortRating" >Ordenar por relevancia</button>
     </div>
 
   </header>);

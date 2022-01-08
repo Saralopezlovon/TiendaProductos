@@ -13,23 +13,37 @@ function App(props) {
 
   const [input, setInput] = useState(""); //Estado inicial del input búsqueda de productos
   const [products, setProducts] = useState([]); //Estado inicial de los productos
-  // const [debouncedText] = useDebounce(input, 2000);
+  // const [debouncedText] = useDebounce(input, 2000); //Por si necesito utilizarlo en algun onchange
 
-   //Función parametrizada por el valor del input de Header y cambiar su estado
+  //Estado para los filtros
+  const [sortName, setSortName] = useState(1);
+  const [sortPrice, setSortPrice] = useState();
+  const [sortRating, setRating] = useState();
 
+  //Función parametrizada por el valor del input de Header y cambiar su estado
    const setInfo = (productSearched) =>{
     setInput({productSearched})     
   }
 
-   //Función que muestra la búsqueda de
-  const getProducts = async (item) =>{
+  //Función parametrizada por el click que se haga en el botón "Ordenar por nombre"
+   const set_sortName = (counterName) =>{
+    setSortName(counterName)
+   } 
+
+  //Función que muestra la búsqueda de
+  const getProducts = async (item,sortName) =>{  
+    console.log(item)
+    console.log(sortName)
 
     if(!item.productSearched){
 
+      //http://localhost:4000/?perPage=5&page=2&name=1
+
       //Búsqueda de todos    
       const allProducts = async ()=>{
-        try{
-          
+        
+        
+        try{          
           const resp = await axios.get(`http://localhost:4000/`) 
           const allProducts = resp.data.docs     
           setProducts([...allProducts]) 
@@ -52,20 +66,20 @@ function App(props) {
         console.log(err)
       }
     }
-
-
   }
 
   //Cuando cambie el estado del buscador se ejecuta la función getProducts
-  
+
   useEffect(() => {
-    getProducts(input)
-  },[input]);
+    getProducts(input,sortName)
+  },[input,sortName]);
 
 
   const dataProducts ={
     products, 
-    setInfo  
+    setInfo,
+    sortName,
+    set_sortName
   }
 
 
