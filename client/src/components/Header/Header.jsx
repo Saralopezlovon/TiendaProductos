@@ -23,7 +23,7 @@ const Header = () => {
       <form className="formSearch" onSubmit={handleSubmit}>
         <label htmlFor="productSearched">Buscar producto</label><br />
         <input className="inputSearch" type="text" id="productSearched" name="productSearched" placeholder="Nombre producto o fabricante" />                        
-        <button type="submit">Buscar</button>
+        <button type="submit">Buscar</button>        
       </form>
     </div>
 

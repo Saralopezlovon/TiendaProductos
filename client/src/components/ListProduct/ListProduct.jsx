@@ -11,8 +11,7 @@ const ListProduct = () => {
     return products.map((item,i)=> <CardProduct infoProduct={item} key={i}/>)
   }
 
-  return <div>
-    ListProduct aqui oiga :
+  return <div>   
     {paintProducts()}
     </div>;
 };
