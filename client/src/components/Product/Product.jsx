@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { useDataLoader } from 'react-use-data-loader'
 import './Product.css';
 import axios from "axios";
+import { Link } from "react-router-dom";
+import ListProduct from "../ListProduct/ListProduct";
 
 const productDetails = async(id) => {
   try {
@@ -19,7 +21,9 @@ const productDetails = async(id) => {
 const Product = () => {
 
   const [searchParams] = useSearchParams();
-  const {data, loading} = useDataLoader (productDetails, searchParams.get('id'))
+  const {data, loading} = useDataLoader(productDetails, searchParams.get('id'))
+
+  
 
   return <div>
     {loading 
@@ -31,7 +35,10 @@ const Product = () => {
             <p>{data.rating}</p>
             <p>id: {data.id}</p> 
       </div>
-  }
+  }  
+
+  <div><Link to='/'>Volver</Link></div>
+
   </div>;
 };
 
