@@ -141,6 +141,24 @@ const products = {
         }catch(err){
             res.status(400).json({"error":err});
         }    
+    },
+
+    findIdProduct : async (req, res) =>{
+        try{ 
+            const options ={
+                populate: {path:'id_provider'},
+                 select: '-_id'
+            }
+
+            let idSearched = parseInt(req.query.id, 10)
+            
+            const data = await Products.paginate({id: idSearched}, options)
+                res.status(200).json(data)
+
+
+        }catch(err){
+            console.log(err)
+        }
     }
 
 }
