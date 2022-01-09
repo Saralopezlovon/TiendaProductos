@@ -80,6 +80,8 @@ function App(props) {
     
     const set_sortClear = (reset) =>{
 
+      //Reseteo el estado de todos los botones
+
       setSortName(reset)
       let btnSortName = document.getElementById("btnSortName");
       btnSortName.innerText = "Ordenar por nombre (A-Z)"
@@ -129,6 +131,7 @@ function App(props) {
 
           }else if(sortPrice){
 
+            //Muestro el filtro aplicado
             if(sortPrice === 1){
               let filter = document.getElementById("filters");
               filter.innerText = "Ordenado de menor a mayor"
@@ -153,6 +156,7 @@ function App(props) {
               filter.innerText = "Ordenar por relevancia (3-1)"
             }
 
+            //Realizo la llamada
             const resp = await axios.get(`http://localhost:4000/?rating=${sortRating}`) 
             const allProducts = resp.data.docs     
             setProducts([...allProducts])
@@ -180,9 +184,66 @@ function App(props) {
 
       //Búsqueda específica      
       try {
-        const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}`)
-        const productsSearched = resp.data.docs
-        setProducts([...productsSearched]) 
+
+        if(sortName){
+
+          //Muestro el filtro aplicado
+          if(sortName === 1){
+            let filter = document.getElementById("filters");
+            filter.innerText = "Ordenado de la A-Z"
+          }else{
+            let filter = document.getElementById("filters");
+            filter.innerText = "Ordenado de la Z-A"
+          }
+
+          //Realizo la llamada
+          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}&name=${sortName}`)
+          const productsSearched = resp.data.docs
+          setProducts([...productsSearched])
+
+        }else if(sortPrice){
+
+          //Muestro el filtro aplicado
+          if(sortPrice === 1){
+            let filter = document.getElementById("filters");
+            filter.innerText = "Ordenado de menor a mayor"
+          }else{
+            let filter = document.getElementById("filters");
+            filter.innerText = "Ordenado de mayor a menor"
+          }
+
+          //Realizo la llamada
+          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}&price=${sortPrice}`)
+          const productsSearched = resp.data.docs
+          setProducts([...productsSearched])
+
+        }else if(sortRating){
+
+          //Muestro el filtro aplicado
+          if(sortRating === 1){
+            let filter = document.getElementById("filters");
+            filter.innerText = "Ordenar por relevancia (1-3)"
+          }else{
+            let filter = document.getElementById("filters");
+            filter.innerText = "Ordenar por relevancia (3-1)"
+          }
+
+          //Realizo la llamada
+          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}&rating=${sortRating}`)
+          const productsSearched = resp.data.docs
+          setProducts([...productsSearched])
+
+        }else{
+
+          let filter = document.getElementById("filters");
+          filter.innerText = ""
+          
+          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}`)
+          const productsSearched = resp.data.docs
+          setProducts([...productsSearched]) 
+
+        }
+
       } catch (err) {
         console.log(err)
       }
