@@ -4,7 +4,6 @@ import { useDataLoader } from 'react-use-data-loader'
 import './Product.css';
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ListProduct from "../ListProduct/ListProduct";
 
 const productDetails = async(id) => {
   try {

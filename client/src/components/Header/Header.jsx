@@ -1,7 +1,7 @@
 import React, { useContext }  from "react";
 import { productContext} from '../../context/productContext';
 import './Header.css';
-//import pikachu  from '../../assets/pikachu.png'
+import logo  from '../../assets/logo.png'
 
 
 const Header = () => {
@@ -68,7 +68,7 @@ const Header = () => {
   <header> 
      
     <div className="headerContainer">
-      <p>LOGO</p>
+      <img src={logo} alt="logoShop" />
       <form className="formSearch" onSubmit={handleSubmit}>
         <label htmlFor="productSearched">Buscar producto</label><br />
         <input className="inputSearch" type="text" id="productSearched" name="productSearched" placeholder="Nombre producto o fabricante" />                        
