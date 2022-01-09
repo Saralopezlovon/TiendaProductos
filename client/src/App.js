@@ -20,6 +20,16 @@ function App(props) {
   const [sortPrice, setSortPrice] = useState();
   const [sortRating, setSortRating] = useState();
 
+  //Estado para la paginación
+  const [page, setPage] = useState(1);
+  const [pagesTotal, setpagesTotal] = useState();
+
+  //Función paginación
+
+  const set_page = (pageSelected) =>{
+    setPage(pageSelected)     
+  }
+
   //Función parametrizada por el valor del input de Header y cambiar su estado
    const setInfo = (productSearched) =>{
     setInput(productSearched)     
@@ -99,11 +109,6 @@ function App(props) {
   //Función que muestra la búsqueda de
   const getProducts = async (productSearched, sortName, sortPrice, sortRating) =>{  
 
-    console.log("Input buscado " + productSearched)
-    console.log("Orden por nombre " + sortName)
-    console.log("Orden por precio " + sortPrice)
-    console.log("Orden por relevancia " + sortRating)
-
     if(!productSearched){
       
       //http://localhost:4000/?perPage=5&page=2&name=1&price=1&rating=1
@@ -125,9 +130,11 @@ function App(props) {
             }
             
             //Realizo la llamada
-            const resp = await axios.get(`http://localhost:4000/?name=${sortName}`) 
-            const allProducts = resp.data.docs     
+            const resp = await axios.get(`http://localhost:4000/?page=${page}&name=${sortName}`) 
+            const allProducts = resp.data.docs 
+            const numPages = resp.data.pages
             setProducts([...allProducts])
+            setpagesTotal(numPages)
 
           }else if(sortPrice){
 
@@ -141,9 +148,11 @@ function App(props) {
             }
 
             //Realizo la llamada
-            const resp = await axios.get(`http://localhost:4000/?price=${sortPrice}`) 
-            const allProducts = resp.data.docs     
+            const resp = await axios.get(`http://localhost:4000/?page=${page}&price=${sortPrice}`) 
+            const allProducts = resp.data.docs
+            const numPages = resp.data.pages     
             setProducts([...allProducts])
+            setpagesTotal(numPages)
 
           }else if(sortRating){
 
@@ -157,22 +166,24 @@ function App(props) {
             }
 
             //Realizo la llamada
-            const resp = await axios.get(`http://localhost:4000/?rating=${sortRating}`) 
-            const allProducts = resp.data.docs     
+            const resp = await axios.get(`http://localhost:4000/?page=${page}&rating=${sortRating}`) 
+            const allProducts = resp.data.docs
+            const numPages = resp.data.pages     
             setProducts([...allProducts])
+            setpagesTotal(numPages)
 
           }else{
 
             let filter = document.getElementById("filters");
             filter.innerText = ""
 
-            const resp = await axios.get(`http://localhost:4000/`) 
-            const allProducts = resp.data.docs     
+            const resp = await axios.get(`http://localhost:4000/?page=${page}`) 
+            const allProducts = resp.data.docs
+            const numPages = resp.data.pages      
             setProducts([...allProducts])
+            setpagesTotal(numPages)
 
           }
-
-        
         }catch(err){
           console.log(err)
           }     
@@ -197,9 +208,11 @@ function App(props) {
           }
 
           //Realizo la llamada
-          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}&name=${sortName}`)
+          const resp = await axios.get(`http://localhost:4000/products/search?page=${page}&nameProduct=${productSearched}&name=${sortName}`)
           const productsSearched = resp.data.docs
+          const numPages = resp.data.pages
           setProducts([...productsSearched])
+          setpagesTotal(numPages)
 
         }else if(sortPrice){
 
@@ -213,9 +226,11 @@ function App(props) {
           }
 
           //Realizo la llamada
-          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}&price=${sortPrice}`)
+          const resp = await axios.get(`http://localhost:4000/products/search?page=${page}&nameProduct=${productSearched}&price=${sortPrice}`)
           const productsSearched = resp.data.docs
+          const numPages = resp.data.pages
           setProducts([...productsSearched])
+          setpagesTotal(numPages)
 
         }else if(sortRating){
 
@@ -229,18 +244,22 @@ function App(props) {
           }
 
           //Realizo la llamada
-          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}&rating=${sortRating}`)
+          const resp = await axios.get(`http://localhost:4000/products/search?page=${page}&nameProduct=${productSearched}&rating=${sortRating}`)
           const productsSearched = resp.data.docs
+          const numPages = resp.data.pages
           setProducts([...productsSearched])
+          setpagesTotal(numPages)
 
         }else{
 
           let filter = document.getElementById("filters");
           filter.innerText = ""
-          
-          const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}`)
+
+          const resp = await axios.get(`http://localhost:4000/products/search?page=${page}&nameProduct=${productSearched}`)
           const productsSearched = resp.data.docs
+          const numPages = resp.data.pages
           setProducts([...productsSearched]) 
+          setpagesTotal(numPages)
 
         }
 
@@ -253,26 +272,23 @@ function App(props) {
   //Cuando cambie el estado del buscador se ejecuta la función getProducts
 
   useEffect(() => {
-    getProducts(input,sortName, sortPrice, sortRating)
-  },[input, sortName, sortPrice, sortRating]);
+    getProducts(input,sortName, sortPrice, sortRating, page)
+  },[input, sortName, sortPrice, sortRating, page]);
 
 
   const dataProducts ={
-    products, 
-
+    products,
     setInfo,
-
     sortName,
     set_sortName,
-
     sortPrice,
     set_sortPrice,
-
     sortRating,
     set_sortRating,
-
-    set_sortClear
-
+    set_sortClear,
+    page,
+    set_page,
+    pagesTotal
   }
 
 

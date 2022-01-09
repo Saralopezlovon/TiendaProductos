@@ -7,14 +7,18 @@ const CardProduct = ({infoProduct}) => {
   const price = infoProduct.price
   const rating = infoProduct.rating
   const image = infoProduct.image
+  const id= infoProduct.id
+
+ 
 
 
   return ( 
-    <div className="card">
+    <div>
       <p>{name}</p>
       <img src={image} alt={name} />
       <p>{price}</p>
-      <p>{rating}</p> 
+      <p>{rating}</p>
+      <p>id: {id}</p> 
     </div>
   );
 };

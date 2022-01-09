@@ -5,15 +5,54 @@ import './ListProduct.css';
 
 
 const ListProduct = () => {
-  const {products} = useContext(productContext)
+  const {products, page, set_page, pagesTotal} = useContext(productContext)  
 
   const paintProducts = () =>{   
     return products.map((item,i)=> <CardProduct infoProduct={item} key={i}/>)
   }
 
-  return <div>   
-    {paintProducts()}
-    </div>;
+  const submitPrevious = (event) =>{
+
+    event.preventDefault();
+
+    if(page > 1){
+    
+    let pageSelected = page-1 
+
+    console.log(pageSelected)
+    set_page(pageSelected) 
+
+    }
+
+  }
+
+
+  const submitNext = (event) =>{
+
+    event.preventDefault();
+
+    if(page < pagesTotal){
+
+    let pageSelected = page+1 
+
+    console.log(pageSelected)
+    set_page(pageSelected) 
+    }
+
+  }
+
+  return <div>
+
+      <div className="productsContainer">   
+        {paintProducts()}
+      </div>
+
+      <div className="paginateContainer">
+        <button className="btnPrevious" onClick={submitPrevious} id="btnPrevious">Anterior</button>
+        <button className="btnNext" onClick={submitNext} id="btnNext">Siguiente</button>
+      </div>
+
+    </div>
 };
 
 export default ListProduct;
