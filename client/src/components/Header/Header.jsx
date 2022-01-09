@@ -6,7 +6,7 @@ import './Header.css';
 
 const Header = () => {
 
-  const {setInfo, sortName, set_sortName, sortPrice, set_sortPrice, sortRating, set_sortRating} = useContext(productContext)
+  const {setInfo, sortName, set_sortName, sortPrice, set_sortPrice, sortRating, set_sortRating, set_sortClear} = useContext(productContext)
 
   const handleSubmit = (event) =>{
     event.preventDefault();
@@ -21,10 +21,11 @@ const Header = () => {
         
     const counterName = sortName === 1 ? -1 : 1;
 
-    let btnSortName = document.getElementById("btnSortName");  
-    btnSortName.style.color = btnSortName.style.color === "blue" ? "black" : "blue"; 
+    let btnSortName = document.getElementById("btnSortName"); 
 
-    set_sortName(counterName) 
+     btnSortName.innerText = btnSortName.innerText === "Ordenar por nombre (A-Z)" ? "Ordenar por nombre (Z-A)" : "Ordenar por nombre (A-Z)";
+
+    set_sortName(counterName)     
 
   }
 
@@ -36,7 +37,7 @@ const Header = () => {
     const counterPrice = sortPrice === 1 ? -1 : 1;
 
     let btnSortPrice = document.getElementById("btnSortPrice");  
-    btnSortPrice.style.color = btnSortPrice.style.color === "blue" ? "black" : "blue"; 
+    btnSortPrice.innerText = btnSortPrice.innerText === "Ordenar por precio (menor a mayor)" ? "Ordenar por precio (mayor a menor)" : "Ordenar por precio (menor a mayor)"; 
 
     set_sortPrice(counterPrice) 
 
@@ -49,11 +50,16 @@ const Header = () => {
         
     const counterRating = sortRating === 1 ? -1 : 1;
 
-    let btnSortRating = document.getElementById("btnSortRating");  
-    btnSortRating.style.color = btnSortRating.style.color === "blue" ? "black" : "blue"; 
+    let btnSortRating = document.getElementById("btnSortRating"); 
+    btnSortRating.innerText = btnSortRating.innerText === "Ordenar por relevancia (1-3)" ? "Ordenar por relevancia (3-1)" : "Ordenar por relevancia (1-3)";  
 
     set_sortRating(counterRating) 
 
+  }
+
+  const submitClear=(event) =>{
+    event.preventDefault();
+    set_sortClear(0)
   }
   
   
@@ -71,9 +77,13 @@ const Header = () => {
     </div>
 
     <div className="sortContainer">
-      <button className="btnSortName" onClick={submitName} id="btnSortName">Ordenar por nombre</button>
-      <button className="btnSortPrice" onClick={submitPrice} id="btnSortPrice">Ordenar por precio</button>
-      <button className="btnSortRating" onClick={submitRating} id="btnSortRating" >Ordenar por relevancia</button>
+      <button className="btnSortName" onClick={submitName} id="btnSortName">Ordenar por nombre (A-Z)</button>
+      <button className="btnSortPrice" onClick={submitPrice} id="btnSortPrice">Ordenar por precio (menor a mayor)</button>
+      <button className="btnSortRating" onClick={submitRating} id="btnSortRating" >Ordenar por relevancia (1-3)</button>
+      <button className="btnSortClear" onClick={submitClear} id="btnSortClear" >X</button>
+    </div>
+    <div>
+      <p id="filters"></p>
     </div>
 
   </header>);
