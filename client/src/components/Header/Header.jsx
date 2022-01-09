@@ -6,7 +6,7 @@ import './Header.css';
 
 const Header = () => {
 
-  const {setInfo, sortName, set_sortName} = useContext(productContext)
+  const {setInfo, sortName, set_sortName, sortPrice, set_sortPrice, sortRating, set_sortRating} = useContext(productContext)
 
   const handleSubmit = (event) =>{
     event.preventDefault();
@@ -14,8 +14,7 @@ const Header = () => {
     setInfo(productSearched)  
   };
 
-  // let counterName = 1;
-
+  //Botón ordenar por nombre
   const submitName = (event) =>{
 
     event.preventDefault();
@@ -26,6 +25,34 @@ const Header = () => {
     btnSortName.style.color = btnSortName.style.color === "blue" ? "black" : "blue"; 
 
     set_sortName(counterName) 
+
+  }
+
+  //Botón ordenar por precio
+  const submitPrice = (event) =>{
+
+    event.preventDefault();
+        
+    const counterPrice = sortPrice === 1 ? -1 : 1;
+
+    let btnSortPrice = document.getElementById("btnSortPrice");  
+    btnSortPrice.style.color = btnSortPrice.style.color === "blue" ? "black" : "blue"; 
+
+    set_sortPrice(counterPrice) 
+
+  }
+
+   //Botón ordenar por relevancia
+   const submitRating = (event) =>{
+
+    event.preventDefault();
+        
+    const counterRating = sortRating === 1 ? -1 : 1;
+
+    let btnSortRating = document.getElementById("btnSortRating");  
+    btnSortRating.style.color = btnSortRating.style.color === "blue" ? "black" : "blue"; 
+
+    set_sortRating(counterRating) 
 
   }
   
@@ -45,8 +72,8 @@ const Header = () => {
 
     <div className="sortContainer">
       <button className="btnSortName" onClick={submitName} id="btnSortName">Ordenar por nombre</button>
-      <button className="btnSortPrice">Ordenar por precio</button>
-      <button className="btnSortRating" >Ordenar por relevancia</button>
+      <button className="btnSortPrice" onClick={submitPrice} id="btnSortPrice">Ordenar por precio</button>
+      <button className="btnSortRating" onClick={submitRating} id="btnSortRating" >Ordenar por relevancia</button>
     </div>
 
   </header>);

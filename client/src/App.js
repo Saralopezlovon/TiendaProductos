@@ -17,25 +17,38 @@ function App(props) {
 
   //Estado para los filtros
   const [sortName, setSortName] = useState(1);
-  const [sortPrice, setSortPrice] = useState();
-  const [sortRating, setRating] = useState();
+  const [sortPrice, setSortPrice] = useState(1);
+  const [sortRating, setSortRating] = useState(1);
 
   //Función parametrizada por el valor del input de Header y cambiar su estado
    const setInfo = (productSearched) =>{
-    setInput({productSearched})     
+    setInput(productSearched)     
   }
 
-  //Función parametrizada por el click que se haga en el botón "Ordenar por nombre"
-   const set_sortName = (counterName) =>{
-    setSortName(counterName)
-   } 
+  //Función parametrizada por el click que se haga en el botón: 
+    //"Ordenar por nombre"
+    const set_sortName = (counterName) =>{
+      setSortName(counterName)
+    }
+    //"Ordenar por precio"
+    const set_sortPrice = (counterPrice) =>{
+      setSortPrice(counterPrice)
+    }
+    //"Ordenar por relevancia"
+    const set_sortRating = (counterRating) =>{
+      setSortRating(counterRating)
+    }  
+   
 
   //Función que muestra la búsqueda de
-  const getProducts = async (item,sortName) =>{  
-    console.log(item)
-    console.log(sortName)
+  const getProducts = async (productSearched, sortName, sortPrice, sortRating) =>{  
 
-    if(!item.productSearched){
+    console.log("Input buscado " + productSearched)
+    console.log("Orden por nombre " + sortName)
+    console.log("Orden por precio " + sortPrice)
+    console.log("Orden por relevancia " + sortRating)
+
+    if(!productSearched){
 
       //http://localhost:4000/?perPage=5&page=2&name=1
 
@@ -56,10 +69,9 @@ function App(props) {
 
     }else{
 
-      //Búsqueda específica
-      const productName = (item.productSearched)
+      //Búsqueda específica      
       try {
-        const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productName}`)
+        const resp = await axios.get(`http://localhost:4000/products/search?nameProduct=${productSearched}`)
         const productsSearched = resp.data.docs
         setProducts([...productsSearched]) 
       } catch (err) {
@@ -71,15 +83,24 @@ function App(props) {
   //Cuando cambie el estado del buscador se ejecuta la función getProducts
 
   useEffect(() => {
-    getProducts(input,sortName)
-  },[input,sortName]);
+    getProducts(input,sortName, sortPrice, sortRating)
+  },[input, sortName, sortPrice, sortRating]);
 
 
   const dataProducts ={
     products, 
+
     setInfo,
+
     sortName,
-    set_sortName
+    set_sortName,
+
+    sortPrice,
+    set_sortPrice,
+
+    sortRating,
+    set_sortRating,
+
   }
 
 
