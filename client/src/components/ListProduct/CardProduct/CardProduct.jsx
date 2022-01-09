@@ -9,8 +9,6 @@ const CardProduct = ({infoProduct}) => {
   const image = infoProduct.image
   const id= infoProduct.id
 
- 
-
 
   return ( 
     <div>

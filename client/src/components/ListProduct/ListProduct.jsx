@@ -2,13 +2,14 @@ import React, {useContext}from "react";
 import CardProduct from "./CardProduct/CardProduct";
 import { productContext} from '../../context/productContext'
 import './ListProduct.css';
+import { Link } from "react-router-dom";
 
 
 const ListProduct = () => {
   const {products, page, set_page, pagesTotal} = useContext(productContext)  
 
   const paintProducts = () =>{   
-    return products.map((item,i)=> <CardProduct infoProduct={item} key={i}/>)
+    return products.map((item,i)=><Link className='product-details' to={`product/detailsProduct?id=${item.id}`}> <CardProduct infoProduct={item} key={i}/> </Link>)
   }
 
   const submitPrevious = (event) =>{
