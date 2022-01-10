@@ -1,0 +1,146 @@
+.header{
+    top:0;
+    background-color: #6665DD;
+    padding-top: 5px;
+    position: fixed;
+    width: 100%;
+}
+
+.headerContainer{    
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 88px;
+    padding-left: 20px;
+}
+
+
+.formSearch{
+    margin-right: 45px;
+    font-family: 'Manrope', sans-serif;
+    display: flex;
+    align-items: center;
+    
+}
+
+.inputSearch{
+    width: 300px;
+    border-width: 0px;
+    border-radius: 2%;
+    background-color:#fefefe ;
+    margin-right: 5px;
+    padding: 5px;
+    font-family: 'Manrope', sans-serif;
+}
+.btnSubmit{
+    background-color: #eeb6d7;
+    border-width:0px;
+    border-radius: 7%;
+    height: 30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+}
+
+.lupa{
+    width: 18px;
+}
+
+.sortContainer{   
+    display: flex;
+    height: 50px; 
+    justify-content: center;
+    align-items: center;    
+
+}
+
+
+.btnSortName {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    border-width:0px;   
+    border-radius: 20px;
+    color: #6665dd;
+    font-size: 14px;
+    background: #bdeff8;
+    padding: 6px 10px 6px 10px;
+    margin-right: 6px;
+    cursor:pointer;
+  
+}
+  
+.btnSortName:hover {
+    background: #a7dee8;
+    text-decoration: none;
+}
+
+.btnSortPrice {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    border-width:0px;   
+    border-radius: 20px;
+    color: #6665dd;
+    font-size: 14px;
+    background: #bdeff8;
+    padding: 6px 10px 6px 10px;
+    margin-right: 6px;
+    cursor:pointer;
+  
+}
+  
+.btnSortPrice:hover {
+    background: #a7dee8;
+    text-decoration: none;
+}
+
+.btnSortRating {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    border-width:0px;   
+    border-radius: 20px;
+    color: #6665dd;
+    font-size: 14px;
+    background: #bdeff8;
+    padding: 6px 10px 6px 10px;
+    margin-right: 6px;
+    cursor:pointer;
+  
+}
+  
+.btnSortRating:hover {
+    background: #a7dee8;
+    text-decoration: none;
+    
+}
+
+.btnSortClear {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    border-width: 0px; 
+    background-color: #6665DD;     
+    color: #fefefe;
+    font-size: 14px;  
+    padding: 6px 10px 6px 10px;
+    cursor:pointer;   
+}
+  
+.filterContainer{
+    display: flex;
+    justify-content: center;  
+    font-family: 'Manrope', sans-serif;
+    text-align: center;    
+    border-radius: 5%;
+}
+
+.filter{
+    background-color:#ffe400 ;
+    padding: 2px;
+    font-weight: 300;
+    font-size: 13px;
+    color:#6665DD;
+    
+}
+    

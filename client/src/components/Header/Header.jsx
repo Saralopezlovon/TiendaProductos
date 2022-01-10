@@ -2,6 +2,7 @@ import React, { useContext }  from "react";
 import { productContext} from '../../context/productContext';
 import './Header.css';
 import logo  from '../../assets/logo.png'
+import lupa  from '../../assets/lupa.png'
 
 
 const Header = () => {
@@ -65,14 +66,13 @@ const Header = () => {
   
   return (
 
-  <header> 
+  <header className="header"> 
      
     <div className="headerContainer">
-      <img src={logo} alt="logoShop" />
-      <form className="formSearch" onSubmit={handleSubmit}>
-        <label htmlFor="productSearched">Buscar producto</label><br />
-        <input className="inputSearch" type="text" id="productSearched" name="productSearched" placeholder="Nombre producto o fabricante" />                        
-        <button type="submit">Buscar</button>        
+      <img src={logo} alt="logoShop" className="logo" />
+      <form className="formSearch" onSubmit={handleSubmit} className="formSearch">
+        <input className="inputSearch" type="text" id="productSearched" name="productSearched" placeholder="Buscar nombre del producto o fabricante" />                        
+        <button type="submit" className="btnSubmit"><img src={lupa} alt="lupa" className="lupa" /></button>        
       </form>
     </div>
 
@@ -82,9 +82,11 @@ const Header = () => {
       <button className="btnSortRating" onClick={submitRating} id="btnSortRating" >Ordenar por relevancia (1-3)</button>
       <button className="btnSortClear" onClick={submitClear} id="btnSortClear" >X</button>
     </div>
-    <div>
-      <p id="filters"></p>
+
+    <div className="filterContainer">
+      <p className="filter" id="filters"></p>
     </div>
+
 
   </header>);
 };

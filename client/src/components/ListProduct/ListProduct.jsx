@@ -42,7 +42,7 @@ const ListProduct = () => {
 
   }
 
-  return <div>
+  return <div className="globalContainer">
 
       <div className="productsContainer">   
         {paintProducts()}

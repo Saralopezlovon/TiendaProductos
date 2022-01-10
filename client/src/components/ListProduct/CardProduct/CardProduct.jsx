@@ -11,12 +11,12 @@ const CardProduct = ({infoProduct}) => {
 
 
   return ( 
-    <div>
-      <p>{name}</p>
-      <img src={image} alt={name} />
-      <p>{price}</p>
-      <p>{rating}</p>
-      <p>id: {id}</p> 
+    <div className="globalCard">
+      <h1 className="cardName">{name}</h1>
+      <p className="cardId">Cod/Ref: {id}</p> 
+      <img className="cardImg" src={image} alt={name} />
+      <p className="cardRating">Relevancia: {rating}</p>
+      <p className="cardPrice">{price}€</p>
     </div>
   );
 };
