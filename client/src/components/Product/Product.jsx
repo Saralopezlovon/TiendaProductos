@@ -24,19 +24,27 @@ const Product = () => {
 
   
 
-  return <div>
+  return <div className="globalCardDetails">
     {loading 
-        ? <div>loading...</div>
-        : <div>
-            <p>{data.name}</p>
-            <img src={data.image} alt={data.name} />
-            <p>{data.price}</p>
-            <p>{data.rating}</p>
-            <p>id: {data.id}</p> 
+        ? <h1 className="loading">Loading...</h1>
+        : <div className="cardDetailProduct">
+
+            <div className="cardDetailImg">
+            <img className="detailImg" src={data.image} alt={data.name} />
+            </div>
+
+            <div className="cardDetailInfo">
+              <h1 className="cardDetailName">{data.name}</h1>
+              <p className="cardDetailId">Cod/Ref: {data.id}</p>
+              <p className="cardDetailRating">Relevancia: {data.rating}</p>
+              <p className="cardDetailPrice">{data.price}€</p>
+            </div>
+            
+           
       </div>
   }  
 
-  <div><Link to='/'>Volver</Link></div>
+  <div className="btnHome"><Link to='/'>Volver</Link></div>
 
   </div>;
 };
