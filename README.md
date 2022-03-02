@@ -17,7 +17,8 @@ Página web en la que podrás encontrar diversidad de artículos y en la que pod
 * Back-end:
     - Node
     - Express
-    - Mongoose - Base de datos no relacional
+    - MongoDB - Base de datos NoSQL
+    - Mongoose
     - Mongoose-paginate
 
 
